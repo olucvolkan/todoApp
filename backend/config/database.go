@@ -2,8 +2,10 @@ package config
 
 import (
 	"fmt"
-
 	"github.com/jinzhu/gorm"
+	"github.com/subosito/gotenv"
+	"os"
+	"strconv"
 )
 
 var DB *gorm.DB
@@ -16,25 +18,23 @@ type DBConfig struct {
 	DBName   string
 	Password string
 }
-//Env support added
-func BuildDBConfig() *DBConfig {
-	var dbConfig = DBConfig{
-		Host:     "",
-		Port:     3306,
-		User:     "",
-		DBName:   "",
-		Password: "",
-	}
-	return &dbConfig
-}
 
-func DbURL(dbConfig *DBConfig) string {
+
+
+
+func DbURL() string {
+
+	gotenv.Load()
+	dbPort, err := strconv.Atoi(os.Getenv("DB_PORT"))
+	if err != nil {
+		dbPort = 3306
+	}
 	return fmt.Sprintf(
 		"%s:%s@tcp(%s:%d)/%s?charset=utf8&parseTime=True&loc=Local",
-		dbConfig.User,
-		dbConfig.Password,
-		dbConfig.Host,
-		dbConfig.Port,
-		dbConfig.DBName,
+		os.Getenv("DB_USER"),
+		os.Getenv("DB_PASSWORD"),
+		os.Getenv("DB_HOST"),
+		dbPort,
+		os.Getenv("DB_NAME"),
 	)
 }

@@ -18,6 +18,13 @@ func GetAllTodos(todo *[]Todo) (err error) {
 	}
 	return nil
 }
+
+func CreateATodo(todo *Todo) (err error) {
+	if err = config.DB.Create(todo).Error; err != nil {
+		return err
+	}
+	return nil
+}
 func (b *Todo) TableName() string {
 	return "todo"
 }

@@ -9,7 +9,8 @@ func SetupRouter() *gin.Engine {
 
 	v1 := r.Group("/v1")
 	{
-		v1.GET("todo", controllers.GetTodos)
+		v1.GET("todo-list", controllers.GetTodos)
+		v1.GET("create-todo", controllers.CreateATodo)
 		
 	}
 
