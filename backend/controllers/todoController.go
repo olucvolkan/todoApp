@@ -16,11 +16,32 @@ func GetTodos(c *gin.Context) {
 	}
 }
 
-
 func CreateATodo(c *gin.Context) {
 	var todo models.Todo
 	c.BindJSON(&todo)
 	err := models.CreateATodo(&todo)
+	if err != nil {
+		c.AbortWithStatus(http.StatusNotFound)
+	} else {
+		c.JSON(http.StatusCreated, todo)
+	}
+}
+
+func DeleteATodo(c *gin.Context) {
+	var todo models.Todo
+	c.BindJSON(&todo)
+	err := models.DeleteATodo(&todo)
+	if err != nil {
+		c.AbortWithStatus(http.StatusNotFound)
+	} else {
+		c.AbortWithStatus(http.StatusNoContent)
+	}
+}
+
+func UpdateATodo(c *gin.Context) {
+	var todo models.Todo
+	c.BindJSON(&todo)
+	err := models.UpdateATodo(&todo)
 	if err != nil {
 		c.AbortWithStatus(http.StatusNotFound)
 	} else {

@@ -25,6 +25,21 @@ func CreateATodo(todo *Todo) (err error) {
 	}
 	return nil
 }
+
+func DeleteATodo(todo *Todo) (err error) {
+	if err = config.DB.Delete(todo).Error; err != nil {
+		return err
+	}
+	return nil
+}
+func UpdateATodo(todo *Todo) (err error) {
+
+	if err = config.DB.Model(&todo).Where("id = ?", todo.ID).Updates(Todo{Title: todo.Title, Description: todo.Description, Status: todo.Status}).Error; err != nil {
+		return err
+	}
+	return nil
+}
+
 func (b *Todo) TableName() string {
 	return "todo"
 }

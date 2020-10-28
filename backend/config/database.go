@@ -20,8 +20,6 @@ type DBConfig struct {
 }
 
 
-
-
 func DbURL() string {
 
 	gotenv.Load()
