@@ -12,6 +12,22 @@ type Todo struct {
 	Status      string `json:"status"`
 }
 
+type CreateTodoRequest struct {
+	Title  string `json:"title" binding:"required"`
+	Description string `json:"description" binding:"required"`
+	Status      string `json:"status" binding:"required"`
+}
+
+type UpdateTodoRequest struct {
+	Title  string `json:"title" binding:"required"`
+	Description string `json:"description" binding:"required"`
+	Status      string `json:"status" binding:"required"`
+}
+
+type DeleteTodoRequest struct {
+	ID uint        `json:"id"  binding:"required"`
+}
+
 func GetAllTodos(todo *[]Todo) (err error) {
 	if err = config.DB.Find(todo).Error; err != nil {
 		return err

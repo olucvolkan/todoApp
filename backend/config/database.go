@@ -19,9 +19,7 @@ type DBConfig struct {
 	Password string
 }
 
-
 func DbURL() string {
-
 	gotenv.Load()
 	dbPort, err := strconv.Atoi(os.Getenv("DB_PORT"))
 	if err != nil {

@@ -11,7 +11,6 @@ import (
 var err error
 
 func main() {
-	fmt.Println(config.DbURL())
 	config.DB, err = gorm.Open("mysql", config.DbURL())
 
 	if err != nil {
@@ -23,5 +22,5 @@ func main() {
 
 	r := routes.SetupRouter()
 	// running
-	r.Run()
+	r.Run(":8081")
 }
