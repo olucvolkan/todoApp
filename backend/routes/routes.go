@@ -11,7 +11,7 @@ func SetupRouter() *gin.Engine {
 	router.GET("/todo-list/", controllers.GetTodos)
 	router.POST("/create-todo/", controllers.CreateATodo)
 	router.POST("/delete-todo/", controllers.DeleteATodo)
-	router.PUT("/update-todo/", controllers.UpdateATodo)
+	router.POST("/update-todo/", controllers.UpdateATodo)
 
 	return router
 }

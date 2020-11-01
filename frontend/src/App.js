@@ -9,16 +9,12 @@ import { v4 } from "uuid";
 
 function App() {
 
-
-  // Note: the empty deps array [] means
-  // this useEffect will run once
-  // similar to componentDidMount()
   const [result, setResult] = useState({});
 
   useEffect(() => {
     async function fetchData() {
       const result = await axios(
-        'http://cbdb2a690889.ngrok.io/todo-list',
+        'http://a2e0dde535d2.ngrok.io/todo-list',
       );
       setResult(result.data);
     } fetchData();
@@ -41,6 +37,8 @@ function App() {
 
     const itemCopy = { ...result[source.droppableId].items[source.index] }
     setResult(prev => {
+      console.log(itemCopy)
+      console.log(prev)
       prev = { ...prev }
       prev[source.droppableId].items.splice(source.index, 1)
 
@@ -49,6 +47,23 @@ function App() {
       return prev
     })
 
+    var updateRequestPayload = {
+      "id": parseInt(itemCopy.id),
+      "status": destination.droppableId,
+    }
+    console.log(updateRequestPayload)
+
+    fetch('http://a2e0dde535d2.ngrok.io/update-todo/', {
+      method: 'POST',
+      body: JSON.stringify(updateRequestPayload),
+      mode: 'no-cors', // no-cors, *cors, same-origin
+      cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+      credentials: 'include', // include, *same-origin, omit
+      headers: {
+        'Content-Type': 'application/json'
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    })
   }
 
 
@@ -79,7 +94,7 @@ function App() {
       "status": "todo",
     }
 
-    fetch('http://fb48482b4a49.ngrok.io/create-todo', {
+    fetch('http://cf017ad1a23c.ngrok.io/create-todo', {
       method: 'POST',
       // We convert the React state to JSON and send it as the POST body
       body: JSON.stringify(requestPayload)
