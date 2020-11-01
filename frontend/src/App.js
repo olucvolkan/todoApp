@@ -18,7 +18,7 @@ function App() {
   useEffect(() => {
     async function fetchData() {
       const result = await axios(
-        'http://localhost:3000/todos',
+        'http://cbdb2a690889.ngrok.io/todo-list',
       );
       setResult(result.data);
     } fetchData();
@@ -51,8 +51,9 @@ function App() {
 
   }
 
+
   const addItem = () => {
-    // Api implementation 
+    // Api implementation     
 
     setResult(prev => {
       return {
@@ -72,12 +73,25 @@ function App() {
     })
     setText("")
 
+    var requestPayload = {
+      "title": text,
+      "description": text,
+      "status": "todo",
+    }
+
+    fetch('http://fb48482b4a49.ngrok.io/create-todo', {
+      method: 'POST',
+      // We convert the React state to JSON and send it as the POST body
+      body: JSON.stringify(requestPayload)
+    }).then(function (response) {
+      console.log(response)
+      return response.json();
+    });
   }
 
+
   return (
-
     <div className="App">
-
       <Container fluid>
         <Row className="justify-content-md-center">
           <Col sm={12}>
