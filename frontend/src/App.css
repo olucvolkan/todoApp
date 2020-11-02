@@ -35,3 +35,8 @@
 .todo-form {
   justify-content: center;
 }
+
+.delete-button{
+  display: flex;
+  margin-left: auto;
+}

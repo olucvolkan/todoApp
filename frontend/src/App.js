@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import _ from 'lodash';
 import axios from 'axios';
-
 import { Button, Container, Row, Col, Form } from 'react-bootstrap';
 import { v4 } from "uuid";
 
@@ -11,10 +10,11 @@ function App() {
 
   const [result, setResult] = useState({});
 
+
   useEffect(() => {
     async function fetchData() {
       const result = await axios(
-        'http://a2e0dde535d2.ngrok.io/todo-list',
+        process.env.REACT_APP_TODO_LIST_URL,
       );
       setResult(result.data);
     } fetchData();
@@ -53,7 +53,7 @@ function App() {
     }
     console.log(updateRequestPayload)
 
-    fetch('http://a2e0dde535d2.ngrok.io/update-todo/', {
+    fetch(process.env.REACT_APP_TODO_UPDATE_URL, {
       method: 'POST',
       body: JSON.stringify(updateRequestPayload),
       mode: 'no-cors', // no-cors, *cors, same-origin
@@ -94,7 +94,7 @@ function App() {
       "status": "todo",
     }
 
-    fetch('http://cf017ad1a23c.ngrok.io/create-todo', {
+    fetch(process.env.REACT_APP_TODO_CREATE_URL, {
       method: 'POST',
       // We convert the React state to JSON and send it as the POST body
       body: JSON.stringify(requestPayload)
@@ -103,8 +103,20 @@ function App() {
       return response.json();
     });
   }
+  const removeItem = ({ id }) => {
+    var requestPayload = {
+      "id": id
+    }
 
-
+    console.log(id)
+    fetch(process.env.REACT_APP_TODO_DELETE_URL, {
+      method: 'POST',
+      // We convert the React state to JSON and send it as the POST body
+      body: JSON.stringify(requestPayload)
+    }).then(function (response) {
+      console.log(response)
+    });
+  }
   return (
     <div className="App">
       <Container fluid>
@@ -149,6 +161,7 @@ function App() {
                                       {...provided.dragHandleProps}
                                     >
                                       {el.description}
+                                      <button id={"delete-button-"+el.id} onClick={() => { removeItem(el.id) }} value={el.id}>Delete</button>
                                     </div>
                                   )
                                 }}
