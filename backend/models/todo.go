@@ -43,7 +43,8 @@ func CreateATodo(todo *Todo) (err error) {
 }
 
 func DeleteATodo(todo *Todo) (err error) {
-	if err = config.DB.Delete(todo).Error; err != nil {
+
+	if err = config.DB.Delete(&Todo{}, todo.ID).Error; err != nil {
 		return err
 	}
 	return nil

@@ -103,12 +103,13 @@ function App() {
       return response.json();
     });
   }
-  const removeItem = ({ id }) => {
+  const removeItem = (id)   => {
+    
     var requestPayload = {
-      "id": id
+      "id": parseInt(id)
     }
 
-    console.log(id)
+    console.log(requestPayload)
     fetch(process.env.REACT_APP_TODO_DELETE_URL, {
       method: 'POST',
       // We convert the React state to JSON and send it as the POST body
@@ -161,7 +162,7 @@ function App() {
                                       {...provided.dragHandleProps}
                                     >
                                       {el.description}
-                                      <button id={"delete-button-"+el.id} onClick={() => { removeItem(el.id) }} value={el.id}>Delete</button>
+                                      <button id={"delete-button-"+el.id} onClick={() => {removeItem(el.id)}} value={el.id}>Delete</button>
                                     </div>
                                   )
                                 }}
