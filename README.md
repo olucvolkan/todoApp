@@ -50,6 +50,6 @@ You will also see any lint errors in the console.
 ### `unit test`
 
 ```sh
-$ go test
+$ cd test && go test
 ```
 
