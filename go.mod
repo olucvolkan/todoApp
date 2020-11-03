@@ -14,6 +14,7 @@ require (
 	github.com/json-iterator/go v1.1.10 // indirect
 	github.com/lib/pq v1.2.0 // indirect
 	github.com/mailru/easyjson v0.7.6 // indirect
+	github.com/rs/cors v1.7.0
 	github.com/stretchr/testify v1.6.1
 	github.com/subosito/gotenv v1.2.0
 	github.com/swaggo/files v0.0.0-20190704085106-630677cd5c14

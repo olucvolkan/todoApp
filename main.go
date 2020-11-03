@@ -10,6 +10,8 @@ import (
 	"github.com/olucvolkan/todoApp/routes"
 	"github.com/swaggo/files"
 	"github.com/swaggo/gin-swagger"
+	cors "github.com/rs/cors/wrapper/gin"
+
 )
 
 var err error
@@ -29,6 +31,8 @@ var err error
 func main() {
 
 	db, err := sql.Open("mysql", config.DbConnection())
+
+	fmt.Println(config.DbConnection())
 	db.Exec("CREATE DATABASE IF NOT EXISTS " + config.GetDbName() + ";")
 
 	if err != nil {
@@ -51,6 +55,7 @@ func main() {
 	docs.SwaggerInfo.Version = "1.0"
 	docs.SwaggerInfo.Host = "localhost:8081"
 	docs.SwaggerInfo.Schemes = []string{"http"}
+	r.Use(cors.Default())
 
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	r.Run(":8081")
