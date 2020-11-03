@@ -7,19 +7,16 @@ import (
 
 type Todo struct {
 	ID          uint   `json:"id"`
-	Title       string `json:"title"`
 	Description string `json:"description"`
 	Status      string `json:"status"`
 }
 
 type CreateTodoRequest struct {
-	Title  string `json:"title" binding:"required"`
 	Description string `json:"description" binding:"required"`
 	Status      string `json:"status" binding:"required"`
 }
 
 type UpdateTodoRequest struct {
-	Title  string `json:"title" binding:"required"`
 	Description string `json:"description" binding:"required"`
 	Status      string `json:"status" binding:"required"`
 }
@@ -51,7 +48,7 @@ func DeleteATodo(todo *Todo) (err error) {
 }
 func UpdateATodo(todo *Todo) (err error) {
 
-	if err = config.DB.Model(&todo).Where("id = ?", todo.ID).Updates(Todo{Title: todo.Title, Description: todo.Description, Status: todo.Status}).Error; err != nil {
+	if err = config.DB.Model(&todo).Where("id = ?", todo.ID).Updates(Todo{ Description: todo.Description, Status: todo.Status}).Error; err != nil {
 		return err
 	}
 	return nil

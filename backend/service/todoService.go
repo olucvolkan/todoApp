@@ -22,7 +22,7 @@ func CreateTodoListSchema(todos []models.Todo) schema.TodoListSchema {
 func AddItem(todoListSchema schema.TodoListSchema, todoId uint, todoText string, todoStatus string) schema.TodoListSchema {
 
 	var todoIdString = strconv.FormatUint(uint64(todoId), 10)
-	item := schema.Item{ID: todoIdString, Title: todoText, Description: todoText, Status: todoStatus}
+	item := schema.Item{ID: todoIdString, Description: todoText, Status: todoStatus}
 	switch todoStatus {
 	case "todo":
 		todoListSchema.Todo.Items = append(todoListSchema.Todo.Items, item)
