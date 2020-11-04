@@ -53,3 +53,8 @@ You will also see any lint errors in the console.
 $ cd test && go test
 ```
 
+### `Docker for local build`
+
+```sh
+$ docker-compose up --build
+```
