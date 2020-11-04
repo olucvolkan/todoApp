@@ -1,8 +1,8 @@
 package service
 
 import (
-	"github.com/olucvolkan/todoApp/models"
-	"github.com/olucvolkan/todoApp/schema"
+	"github.com/olucvolkan/todoApp/api/models"
+	"github.com/olucvolkan/todoApp/api/schema"
 	"strconv"
 )
 

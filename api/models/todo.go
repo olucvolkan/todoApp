@@ -2,7 +2,7 @@ package models
 
 import (
 	_ "github.com/go-sql-driver/mysql"
-	"github.com/olucvolkan/todoApp/config"
+	"github.com/olucvolkan/todoApp/api/config"
 )
 
 type Todo struct {
