@@ -59,5 +59,5 @@ func main() {
 	r.Use(cors.Default())
 
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
-	r.Run(port)
+	r.Run(":" + port)
 }
