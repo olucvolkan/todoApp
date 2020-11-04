@@ -11,7 +11,7 @@ import (
 	"github.com/swaggo/files"
 	"github.com/swaggo/gin-swagger"
 	cors "github.com/rs/cors/wrapper/gin"
-
+	"os"
 )
 
 var err error
@@ -34,7 +34,8 @@ func main() {
 
 	fmt.Println(config.DbConnection())
 	db.Exec("CREATE DATABASE IF NOT EXISTS " + config.GetDbName() + ";")
-
+	port := os.Getenv("PORT")
+	
 	if err != nil {
 		fmt.Println(err.Error())
 	} else {
@@ -58,5 +59,5 @@ func main() {
 	r.Use(cors.Default())
 
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
-	r.Run(":8080")
+	r.Run(port)
 }
