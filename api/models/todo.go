@@ -17,6 +17,7 @@ type CreateTodoRequest struct {
 }
 
 type UpdateTodoRequest struct {
+	ID uint        `json:"id"  binding:"required"`
 	Description string `json:"description" binding:"required"`
 	Status      string `json:"status" binding:"required"`
 }
