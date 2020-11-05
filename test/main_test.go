@@ -7,6 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
 	"github.com/olucvolkan/todoApp/api/config"
+	"github.com/olucvolkan/todoApp/api/controllers"
 	"github.com/olucvolkan/todoApp/api/models"
 	"github.com/olucvolkan/todoApp/api/routes"
 	"github.com/stretchr/testify/assert"
@@ -45,7 +46,7 @@ func TestTodoCRUD(t *testing.T) {
 
 	t.Run("Create Todo endpoint", func(t *testing.T) {
 		
-		todo, _ := json.Marshal(models.CreateTodoRequest{Description: "Test Record", Status: "Todo"})
+		todo, _ := json.Marshal(controllers.CreateTodoRequest{Description: "Test Record", Status: "Todo"})
 
 		fmt.Println(string(todo))
 		req, err := http.NewRequest("POST", "/create-todo/", bytes.NewReader(todo))
@@ -68,7 +69,7 @@ func TestTodoCRUD(t *testing.T) {
 
 	t.Run("Update Todo endpoint", func(t *testing.T) {
 
-		todo, _ := json.Marshal(models.UpdateTodoRequest{ID:1,Description: "Test Record2", Status: "Todo"})
+		todo, _ := json.Marshal(controllers.UpdateTodoRequest{ID:1,Description: "Test Record2", Status: "Todo"})
 
 		fmt.Println(string(todo))
 		req, err := http.NewRequest("POST", "/update-todo/", bytes.NewReader(todo))
@@ -82,7 +83,7 @@ func TestTodoCRUD(t *testing.T) {
 	})
 	t.Run("Delete Todo endpoint", func(t *testing.T) {
 
-		todo, _ := json.Marshal(models.DeleteTodoRequest{ID: 1})
+		todo, _ := json.Marshal(controllers.DeleteTodoRequest{ID: 1})
 
 		fmt.Println(string(todo))
 		req, err := http.NewRequest("POST", "/delete-todo/", bytes.NewReader(todo))

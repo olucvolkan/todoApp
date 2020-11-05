@@ -80,3 +80,18 @@ func UpdateATodo(c *gin.Context) {
 		c.JSON(http.StatusOK, todo)
 	}
 }
+
+type CreateTodoRequest struct {
+	Description string `json:"description" binding:"required"`
+	Status      string `json:"status" binding:"required"`
+}
+
+type UpdateTodoRequest struct {
+	ID uint        `json:"id"  binding:"required"`
+	Description string `json:"description" binding:"required"`
+	Status      string `json:"status" binding:"required"`
+}
+
+type DeleteTodoRequest struct {
+	ID uint        `json:"id"  binding:"required"`
+}
