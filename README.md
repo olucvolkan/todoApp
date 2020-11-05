@@ -1,6 +1,5 @@
 # Todos Restful Api
 
-[![Build Status]()
 
 Todo-app is backend and frontend project.I developed it using backend golang and frontend it using reactjs.
 
