@@ -21,7 +21,7 @@ type Done struct {
 }
 
 type Items struct {
-	Item []Item
+	Item []string
 }
 
 type Item struct {

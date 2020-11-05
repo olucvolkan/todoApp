@@ -22,7 +22,11 @@ func CreateTodoListSchema(todos []models.Todo) schema.TodoListSchema {
 func AddItem(todoListSchema schema.TodoListSchema, todoId uint, todoText string, todoStatus string) schema.TodoListSchema {
 
 	var todoIdString = strconv.FormatUint(uint64(todoId), 10)
+
 	item := schema.Item{ID: todoIdString, Description: todoText, Status: todoStatus}
+	todoListSchema.Todo.Items = make([]schema.Item, 0)
+	todoListSchema.Inprogress.Items = make([]schema.Item, 0)
+	todoListSchema.Done.Items = make([]schema.Item, 0)
 	switch todoStatus {
 	case "todo":
 		todoListSchema.Todo.Items = append(todoListSchema.Todo.Items, item)
@@ -31,6 +35,7 @@ func AddItem(todoListSchema schema.TodoListSchema, todoId uint, todoText string,
 	case "done":
 		todoListSchema.Done.Items = append(todoListSchema.Done.Items, item)
 	}
+
 	return todoListSchema
 
 }
